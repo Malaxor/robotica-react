@@ -1,0 +1,79 @@
+.student {
+  display: flex;
+  align-items: flex-start;
+  gap: 3rem;
+  padding: 1.5rem 3rem;
+  border-bottom: 1px solid #DCDCDC;
+  position: relative;
+}
+.student__information {
+  width: 50%;
+}
+.student__img {
+  border: 1px solid #7177a0;
+  border-radius: 50%;
+  height: 14rem;
+}
+.student__name {
+  font-size: 3rem;
+  color: black;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.student__details {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin-bottom: 1.5rem;
+}
+.student__details,
+.student__grades,
+.student__form {
+  padding-left: 2rem;
+}
+.student__grades {
+  margin-bottom: 1.5rem;
+}
+.student__tags {
+  display: flex;
+  width: 70%;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding-left: 2.2rem;
+}
+.student__tag {
+  background-color: #d1d1d1;
+  padding: 1rem;
+  border-radius: 3px;
+}
+.student__form {
+  width: 70%;
+}
+.btn {
+  cursor: pointer;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  height: 3rem;
+  width: 3rem;
+  border: none; 
+  background: none;
+}
+.horizontal,
+.vertical {
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  background-color: #7177a0;
+  border-radius: 10px;
+}
+.vertical {
+  transform: rotate(90deg) translateY(-.5px);
+}
+.student__grades,
+.student__grades.open ~ .btn .vertical {
+  display: none;
+}
+.student__grades.open {
+  display: block;
+} 
