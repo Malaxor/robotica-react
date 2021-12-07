@@ -36,7 +36,7 @@ const Student = ({
       appendTags(studentId, tags);
       setStateUpdated(false);
     };
-  }, [stateUpdated, tags, appendTags, studentId]);
+  }, [stateUpdated, setStateUpdated, tags, appendTags, studentId]);
 
   const avgGrade = useMemo(() => averageGrade(grades), [grades]);
 
