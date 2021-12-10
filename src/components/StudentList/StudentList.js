@@ -36,7 +36,7 @@ const StudentList = () => {
         return student;
       })
     ));
-  },[]);
+  }, [setStudents]);
   
   return (
     <div className="students">

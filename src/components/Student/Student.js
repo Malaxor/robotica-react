@@ -46,35 +46,33 @@ const Student = ({
           <li className="student__detail">Skill: {skill}</li>
           <li className="student__detail">Average: {avgGrade}%</li>
         </ul>
-        {displayGrades && <Fragment>
+        {displayGrades && <>
           <ul className="student__grades">
             {grades.map((grade, index) => 
               <li key={index} className="student__grade">Test {index + 1} &mdash; <span>{grade}%</span></li>
             )}
           </ul>
-        </Fragment>}
+        </>}
         <ul className="student__tags">
           {studentTags.map((tag, index) => <li key={index} className="student__tag">{tag}</li>)}
         </ul>
-        <div className="student__form">
-          <form action="#" className="form" onSubmit={onTagsSubmit}>
-            <Input 
-              inputSize="input--small" 
-              placeholder="Add a tag"
-              name='tag'
-              value={tag}
-              setState={setTag}
-            />
-          </form>
-      </div>
+        <form action="#" className="student__form" onSubmit={onTagsSubmit}>
+          <Input 
+            inputSize="input--small" 
+            placeholder="Add a tag"
+            name='tag'
+            value={tag}
+            setState={setTag}
+          />
+        </form>
         <button 
           className="btn"
           onClick={() => setDisplayGrades(!displayGrades)}
         >
           <div className="horizontal"></div>
-          {!displayGrades && <Fragment>
+          {!displayGrades && <>
               <div className="vertical"></div>
-            </Fragment>}
+            </>}
         </button>
       </div>
     </div>
