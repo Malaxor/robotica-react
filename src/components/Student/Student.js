@@ -1,10 +1,10 @@
-import React, { useRef, useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, Fragment } from 'react';
 import Input from '../Input/Input';
 import averageGrade from '../../utils/averageGrade';
 import './style.css';
 
 const Student = ({ 
-  appendTags,
+  setStudents,
   student: {
     id: studentId,
     firstName,
@@ -17,26 +17,31 @@ const Student = ({
     tags: studentTags
   }}) => {
   const fullName = `${firstName} ${lastName}`;
-  const studentGradesEl = useRef();
   const [tag, setTag] = useState('');
   const [tags, setTags] = useState([]);
-  const [stateUpdated, setStateUpdated] = useState(false);
+  const [displayGrades, setDisplayGrades] = useState(false);
   
   const onTagsSubmit = e => {
     if (tag.length) {
       e.preventDefault();
       
       setTags(prevState => [...prevState, tag]);
-      setStateUpdated(true);
       setTag('');
     }
   }
   useEffect(() => {
-    if (stateUpdated) {
-      appendTags(studentId, tags);
-      setStateUpdated(false);
-    };
-  }, [stateUpdated, setStateUpdated, tags, appendTags, studentId]);
+    setStudents(prevState => (
+      prevState.map(student => {
+        if (student.id === studentId) {
+          return {
+            ...student,
+            tags: [...tags]
+          };
+        }
+        return student;
+      })
+    ));
+  }, [tags, studentId, setStudents]);
 
   const avgGrade = useMemo(() => averageGrade(grades), [grades]);
 
@@ -51,11 +56,13 @@ const Student = ({
           <li className="student__detail">Skill: {skill}</li>
           <li className="student__detail">Average: {avgGrade}%</li>
         </ul>
-        <ul ref={studentGradesEl} className="student__grades">
-          {grades.map((grade, index) => 
-            <li key={index} className="student__grade">Test {index + 1} &mdash; <span>{grade}%</span></li>
-          )}
-        </ul>
+        {displayGrades && <Fragment>
+          <ul className="student__grades">
+            {grades.map((grade, index) => 
+              <li key={index} className="student__grade">Test {index + 1} &mdash; <span>{grade}%</span></li>
+            )}
+          </ul>
+        </Fragment>}
         <ul className="student__tags">
           {studentTags.map((tag, index) => <li key={index} className="student__tag">{tag}</li>)}
         </ul>
@@ -72,10 +79,12 @@ const Student = ({
       </div>
         <button 
           className="btn"
-          onClick={() => studentGradesEl.current.classList.toggle('open')}
+          onClick={() => setDisplayGrades(!displayGrades)}
         >
           <div className="horizontal"></div>
-          <div className="vertical"></div>
+          {!displayGrades && <Fragment>
+              <div className="vertical"></div>
+            </Fragment>}
         </button>
       </div>
     </div>

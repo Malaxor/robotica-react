@@ -17,26 +17,13 @@ const StudentList = () => {
             return {
               ...student,
               tags: []
-            }
+            };
           })
         );
       })
       .catch(err => console.error(err));
   }, []);
   
-  const appendTags = (studentId, tags) => (
-    setStudents(prevState => (
-      prevState.map(student => {
-        if (student.id === studentId) {
-          return {
-            ...student,
-            tags: [...tags]
-          }
-        }
-        return student;
-      })
-    ))
-  );
   return (
     <div className="students">
       <div className="input-box">
@@ -77,7 +64,7 @@ const StudentList = () => {
           <Student 
             key={student.id} 
             student={student} 
-            appendTags={appendTags} 
+            setStudents={setStudents}
           />
         )}
     </div>
