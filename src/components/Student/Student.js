@@ -4,7 +4,7 @@ import averageGrade from '../../utils/averageGrade';
 import './style.css';
 
 const Student = ({ 
-  setStudents,
+  appendTags,
   student: {
     id: studentId,
     firstName,
@@ -24,24 +24,14 @@ const Student = ({
   const onTagsSubmit = e => {
     if (tag.length) {
       e.preventDefault();
-      
       setTags(prevState => [...prevState, tag]);
       setTag('');
     }
   }
+  
   useEffect(() => {
-    setStudents(prevState => (
-      prevState.map(student => {
-        if (student.id === studentId) {
-          return {
-            ...student,
-            tags: [...tags]
-          };
-        }
-        return student;
-      })
-    ));
-  }, [tags, studentId, setStudents]);
+    appendTags(studentId, tags);
+  }, [tags, studentId, appendTags]);
 
   const avgGrade = useMemo(() => averageGrade(grades), [grades]);
 
