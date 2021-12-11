@@ -49,7 +49,7 @@ const Student = ({
         {displayGrades && <>
           <ul className="student__grades">
             {grades.map((grade, index) => 
-              <li key={index} className="student__grade">Test {index + 1} &mdash; <span>{grade}%</span></li>
+              <li key={index} className="student__grade">Test {index + 1} &mdash; {grade}%</li>
             )}
           </ul>
         </>}
