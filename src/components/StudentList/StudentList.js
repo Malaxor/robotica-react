@@ -60,7 +60,7 @@ const StudentList = () => {
         .filter(student => {
           const fullName = `${student.firstName} ${student.lastName}`;
           
-          if(!name || fullName.toLowerCase().includes(name.toLowerCase())) {
+          if (!name || fullName.toLowerCase().includes(name.toLowerCase())) {
             return student;
           }
           return false;
@@ -69,9 +69,9 @@ const StudentList = () => {
           const tagMatch = student.tags.some(studentTag =>
             studentTag.toLowerCase().includes(tag.toLowerCase())
           );
-          if(!tag || tagMatch) {
+          if (!tag || tagMatch) {
             return student;
-          }
+          } 
           return false;
         })
         .map(student => 

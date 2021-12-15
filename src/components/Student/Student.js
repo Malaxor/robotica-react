@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, Fragment } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Input from '../Input/Input';
 import averageGrade from '../../utils/averageGrade';
 import './style.css';
@@ -19,16 +19,15 @@ const Student = ({
   const fullName = `${firstName} ${lastName}`;
   const [tag, setTag] = useState('');
   const [tags, setTags] = useState([]);
-  const [displayGrades, setDisplayGrades] = useState(false);
+  const studentGradesEl = useRef();
   
   const onTagsSubmit = e => {
-    if (tag.length) {
+    if (tag) {
       e.preventDefault();
       setTags(prevState => [...prevState, tag]);
       setTag('');
     }
   }
-  
   useEffect(() => {
     appendTags(studentId, tags);
   }, [tags, studentId, appendTags]);
@@ -46,16 +45,14 @@ const Student = ({
           <li className="student__detail">Skill: {skill}</li>
           <li className="student__detail">Average: {avgGrade}%</li>
         </ul>
-        {displayGrades && <>
-          <ul className="student__grades">
-            {grades.map((grade, index) => 
-              <li key={index} className="student__grade">Test {index + 1} &mdash; {grade}%</li>
-            )}
-          </ul>
-        </>}
-        <ul className="student__tags">
-          {studentTags.map((tag, index) => <li key={index} className="student__tag">{tag}</li>)}
+        <ul ref={studentGradesEl} className="student__grades">
+          {grades.map((grade, index) => 
+            <li key={index} className="student__grade">Test {index + 1} &mdash; {grade}%</li>
+          )}
         </ul>
+        <div className="student__tags">
+          {studentTags.map((tag, index) => <span key={index} className="student__tag">{tag}</span>)}
+        </div>
         <form action="#" className="student__form" onSubmit={onTagsSubmit}>
           <Input 
             inputSize="input--small" 
@@ -67,12 +64,10 @@ const Student = ({
         </form>
         <button 
           className="btn"
-          onClick={() => setDisplayGrades(!displayGrades)}
+          onClick={() => studentGradesEl.current.classList.toggle('open')}
         >
           <div className="horizontal"></div>
-          {!displayGrades && <>
-              <div className="vertical"></div>
-            </>}
+          <div className="vertical"></div>
         </button>
       </div>
     </div>

@@ -1,6 +1,5 @@
 .student {
   display: flex;
-  align-items: flex-start;
   gap: 3rem;
   padding: 1.5rem 3rem;
   border-bottom: 1px solid #DCDCDC;
@@ -36,9 +35,9 @@
 }
 .student__tags {
   display: flex;
-  width: 70%;
   flex-wrap: wrap;
   gap: .5rem;
+  width: 70%;
   padding-left: 2.2rem;
 }
 .student__tag {
@@ -70,3 +69,11 @@
 .vertical {
   transform: rotate(90deg) translateY(-.5px);
 }
+
+.student__grades,
+.student__grades.open ~ .btn .vertical {
+  display: none;
+}
+.student__grades.open {
+  display: block;
+} 
