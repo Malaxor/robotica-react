@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import Input from '../Input/Input';
 import averageGrade from '../../utils/averageGrade';
 import './style.css';
 
 const Student = ({ 
-  appendTags,
+  appendTag,
   student: {
     id: studentId,
     firstName,
@@ -18,20 +18,15 @@ const Student = ({
   }}) => {
   const fullName = `${firstName} ${lastName}`;
   const [tag, setTag] = useState('');
-  const [tags, setTags] = useState([]);
   const studentGradesEl = useRef();
   
-  const onTagsSubmit = e => {
+  const onTagSubmit = e => {
     if (tag) {
       e.preventDefault();
-      setTags(prevState => [...prevState, tag]);
+      appendTag(studentId, tag);
       setTag('');
     }
   }
-  useEffect(() => {
-    appendTags(studentId, tags);
-  }, [tags, studentId, appendTags]);
-
   const avgGrade = useMemo(() => averageGrade(grades), [grades]);
 
   return (
@@ -53,7 +48,7 @@ const Student = ({
         <div className="student__tags">
           {studentTags.map((tag, index) => <span key={index} className="student__tag">{tag}</span>)}
         </div>
-        <form action="#" className="student__form" onSubmit={onTagsSubmit}>
+        <form action="#" className="student__form" onSubmit={onTagSubmit}>
           <Input 
             inputSize="input--small" 
             placeholder="Add a tag"

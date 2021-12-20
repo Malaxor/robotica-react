@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Student from '../Student/Student';
 import Input from '../Input/Input';
@@ -24,19 +24,19 @@ const StudentList = () => {
       .catch(err => console.error(err));
   }, []);
 
-  const appendTags = useCallback((studentId, tags) => {
+  const appendTag = (studentId, tag) => {
     setStudents(prevState => (
       prevState.map(student => {
         if (student.id === studentId) {
           return {
             ...student,
-            tags: [...tags]
+            tags: [...student.tags, tag]
           };
         }
         return student;
       })
     ));
-  }, [setStudents]);
+  }
   
   return (
     <div className="students">
@@ -77,8 +77,8 @@ const StudentList = () => {
         .map(student => 
           <Student 
             key={student.id} 
-            student={student} 
-            appendTags={appendTags}
+            student={student}
+            appendTag={appendTag}
           />
         )}
     </div>
