@@ -46,7 +46,8 @@ const Student = ({
           )}
         </ul>
         <div className="student__tags">
-          {studentTags.map((tag, index) => <span key={index} className="student__tag">{tag}</span>)}
+          {studentTags.length > 0 && 
+            studentTags.map((tag, index) => <span key={index} className="student__tag">{tag}</span>)}
         </div>
         <form action="#" className="student__form" onSubmit={onTagSubmit}>
           <Input 
