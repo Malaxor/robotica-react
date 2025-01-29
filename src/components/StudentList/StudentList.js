@@ -39,8 +39,8 @@ const StudentList = () => {
   }
   
   return (
-    <div className="students">
-      <div className="input-box">
+    <main className="students">
+      <form className="input-box" action="#">
         <Input 
           inputSize='input--large'
           placeholder="Search by name"
@@ -55,7 +55,7 @@ const StudentList = () => {
           value={tag}
           setState={setTag}
         />
-      </div>
+      </form>
         {students // first filter is for searching by name
         .filter(student => {
           const fullName = `${student.firstName} ${student.lastName}`;
@@ -81,7 +81,7 @@ const StudentList = () => {
             appendTag={appendTag}
           />
         )}
-    </div>
+    </main>
   );
 }
 export default StudentList;

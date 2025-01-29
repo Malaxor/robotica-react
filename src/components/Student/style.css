@@ -43,7 +43,7 @@
 .student__tag {
   background-color: #d1d1d1;
   padding: 1rem;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 .student__form {
   width: 70%;
@@ -70,10 +70,3 @@
   transform: rotate(90deg) translateY(-.5px);
 }
 
-.student__grades,
-.student__grades.open ~ .btn .vertical {
-  display: none;
-}
-.student__grades.open {
-  display: block;
-} 
